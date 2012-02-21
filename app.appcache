@@ -1,0 +1,23 @@
+CACHE MANIFEST
+# 2012-02-21:v9.3
+
+CACHE:
+index.html
+styles/styles.css
+styles/jquery.mobile-1.0.1.min.css
+scripts/jquery-1.6.4.min.js
+scripts/jquery.mobile-1.0.1.min.js
+scripts/utils.js
+scripts/home.js
+scripts/calculator.js
+assets/images/plate-big.png
+assets/images/table_01.jpg
+assets/images/bill.jpg
+assets/images/trash.png
+assets/favicon.ico
+styles/images/ajax-loader.png
+styles/images/icons-18-black.png
+styles/images/icons-18-white.png
+styles/images/icons-36-black.png
+styles/images/icons-36-white.png
+

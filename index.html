@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html manifest="app.appcache">
+<head>
+    <!--
+    This web app was created by Mihai Corlan - http://corlan.org
+    You can use and change the code as you might see fit.
+    -->
+    <title>aTabSplitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <link rel="apple-touch-startup-image" href="/assets/images/table_01.jpg">
+    <link rel="apple-touch-icon" href="apple-touch-icon-57x57-precomposed.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet" href="styles/jquery.mobile-1.0.1.min.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <script src="scripts/jquery-1.6.4.min.js"></script>
+    <script src="scripts/jquery.mobile-1.0.1.min.js"></script>
+
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/home.js"></script>
+    <script src="scripts/calculator.js"></script>
+
+<script type="text/javascript" >
+
+    var dragObj;
+    var arrPlates;
+    var currentObjectEdited;
+    var trashBin;
+
+    $(document).ready(function() {
+        var p, c, l;
+        dragObj = {zIndex: 0};
+        arrPlates = [];
+
+        window.onresize = function(e) {      setUISize();   };
+        setUISize();
+        //position the first plate
+        p = document.getElementById('firstPlate');
+        p.style.top = ($(window).height() - 2 * $('#header1').height()) / 2 + 100 + 'px';
+        p.style.left = $(window).width() / 2 - 50  + 'px';
+        arrPlates[0] = p;
+        registerEventsForPlate(p);
+        //restore application state if there is a previous state saved
+        restoreApplicationState(arrPlates, document.getElementById('contentHome'));
+
+        //register listeners
+        document.getElementById('contentHome').addEventListener('mousedown', addNewPlate, false);
+        trashBin = document.getElementById('trash');
+
+        if ($.mobile.activePage[0].id === 'calculator') {
+            l = window.location;
+            l.hash = '';
+            window.location = l;
+        }
+        // fix for canceling the scrolling of the body on mobile devices
+        document.body.addEventListener('touchmove', function(event) {
+                event.preventDefault();
+            }, false);
+    });
+
+    function setUISize() {
+        var h, t, tip;
+        h = $(window).height() - 2 * $('#header1').height();// - $('#footer1').height();
+        document.getElementById('contentHome').style.height = h + 'px';
+        document.getElementById('contentCalculator').style.height = h + 'px';
+        tip = document.getElementById('tipWrapper');
+        tip.style.right = '10px';
+        tip.style.bottom = '80px';
+        t = 400;
+        document.getElementById('keyboard').style.height = t + 'px';
+        document.getElementById('calculatorDisplayWrapper').style.height = h - t - 170 + 'px';
+    }
+
+</script>
+</head>
+<body>
+
+<!-- Start of first page -->
+<div data-role="page" id="home">
+	<div data-role="header" data-position="fixed" id="header1">
+		<h1>aTabSplitter</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" id="contentHome">
+        <div id="trash">
+            <img src="assets/images/trash.png">
+        </div>
+        <div id="totalWrapper">
+            <span id="total">Total: 0</span>
+        </div>
+
+        <div class="plate" id="firstPlate">
+            <img src="assets/images/plate-big.png"/>
+            <div>0</div>
+            <span></span>
+        </div>
+
+        <div data-role="fieldcontain" id="tipWrapper">
+        	<label for="tipSlider">Tip:</label>
+        	<input type="range" name="tipSlider" id="tipSlider" onchange="onTipChange(event)" value="0" min="0" max="100" data-theme="a" data-track-theme="b" />
+        </div>
+	</div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed" id="footer1">
+          <h4>Touch/Click to add a new person</h4>
+    </div>
+</div><!-- /end first page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="calculator">
+	<div data-role="header" data-position="fixed">
+		<h1>Editing</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" id="contentCalculator">
+        <div id="calculatorDisplayWrapper">
+            <div id="calculatorDisplay">|</div>
+        </div>
+        <div id="calculatorTotalWrapper">
+            <span id="calculatorTotal">Total: 0</span>
+        </div>
+        <table id="keyboard" cellspacing="0" cellpadding="0">
+            <tr>
+                <td><input type="button" value="7" onmousedown="addChar(7, event)" ontouchstart="addChar(7, event)" data-theme="e"></td>
+                <td><input type="button" value="8" onmousedown="addChar(8, event)" ontouchstart="addChar(8, event)" data-theme="e"></td>
+                <td><input type="button" value="9" onmousedown="addChar(9, event)" ontouchstart="addChar(9, event)" data-theme="e"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" onmousedown="addChar(4, event)" ontouchstart="addChar(4, event)" data-theme="e"></td>
+                <td><input type="button" value="5" onmousedown="addChar(5, event)" ontouchstart="addChar(5, event)" data-theme="e"></td>
+                <td><input type="button" value="6" onmousedown="addChar(6, event)" ontouchstart="addChar(6, event)" data-theme="e"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" onmousedown="addChar(1, event)" ontouchstart="addChar(1, event)" data-theme="e" height="200px"></td>
+                <td><input type="button" value="2" onmousedown="addChar(2, event)" ontouchstart="addChar(2, event)" data-theme="e"></td>
+                <td><input type="button" value="3" onmousedown="addChar(3, event)" ontouchstart="addChar(3, event)" data-theme="e"></td>
+                <td><input type="button" value="&lt;" onmousedown="moveCarret(-1, event)" ontouchstart="moveCarret(-1, event)" data-theme="c"></td>
+                <td><input type="button" value="&gt;" onmousedown="moveCarret(+1, event)" ontouchstart="moveCarret(+1, event)" data-theme="c"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="." onmousedown="addChar('.', event)" ontouchstart="addChar('.', event)" data-theme="c"></td>
+                <td><input type="button" value="0" onmousedown="addChar(0, event)" ontouchstart="addChar(0, event)" data-theme="e"></td>
+                <td><input type="button" value="+" onmousedown="addChar('+', event)" ontouchstart="addChar('+', event)" data-theme="c"></td>
+                <td colspan="2"><input type="button" value="DEL" onmousedown="delChar(event)" ontouchstart="delChar(event)" data-theme="b"></td>
+            </tr>
+        </table>
+	</div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+           <ul>
+              <li><a onclick="onSave(event)" data-rel="back">Save</a></li>
+              <li><a onclick="onCancel(event)" data-rel="back">Cancel</a></li>
+           </ul>
+        </div>
+    </div>
+</div><!-- /end second page -->
+
+</body>
+</html>
