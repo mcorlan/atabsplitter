@@ -42,9 +42,9 @@ function updateTotal() {
 function addNewPlate(e) {
     var p, tip;
     tip = document.getElementById('tipWrapper');
+    //don't add a plate if the user touched the tip slider
     if (e.target === tip || elementIsIn(e.target, tip))
         return;
-//    console.log('new plate has to be added');
     p = createNewPlate();
     p.style.top = e.offsetY + 'px';
     p.style.left = e.offsetX - 50 + 'px';
@@ -150,7 +150,8 @@ function createNewPlate() {
     var p;
     p = document.createElement('div');
     p.className = 'plate';
-    p.innerHTML = '<img src="assets/images/plate-big.png"/>\n<div>0</div>\n<span></span>\n';
+    p.innerHTML = '<img src="assets/images/plate-big.png"/>\n<div>0</div>\n';
+//    p.innerHTML = '<img src="assets/images/plate-big.png"/>\n<div>0</div>\n<span></span>\n';
     return p;
 }
 

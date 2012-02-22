@@ -10,11 +10,11 @@
 
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
-    <link rel="apple-touch-startup-image" href="/assets/images/table_01.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-startup-image" href="assets/images/table_01.jpg">
     <link rel="apple-touch-icon" href="apple-touch-icon-57x57-precomposed.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <link rel="stylesheet" href="styles/jquery.mobile-1.0.1.min.css" />
     <link rel="stylesheet" href="styles/styles.css" />
@@ -53,6 +53,7 @@
         document.getElementById('contentHome').addEventListener('mousedown', addNewPlate, false);
         trashBin = document.getElementById('trash');
 
+        //forcing the app to load the first screen if the user lands directly on the second page
         if ($.mobile.activePage[0].id === 'calculator') {
             l = window.location;
             l.hash = '';
@@ -98,7 +99,6 @@
         <div class="plate" id="firstPlate">
             <img src="assets/images/plate-big.png"/>
             <div>0</div>
-            <span></span>
         </div>
 
         <div data-role="fieldcontain" id="tipWrapper">
@@ -127,6 +127,7 @@
             <span id="calculatorTotal">Total: 0</span>
         </div>
         <table id="keyboard" cellspacing="0" cellpadding="0">
+            <tbody>
             <tr>
                 <td><input type="button" value="7" onmousedown="addChar(7, event)" ontouchstart="addChar(7, event)" data-theme="e"></td>
                 <td><input type="button" value="8" onmousedown="addChar(8, event)" ontouchstart="addChar(8, event)" data-theme="e"></td>
@@ -154,6 +155,7 @@
                 <td><input type="button" value="+" onmousedown="addChar('+', event)" ontouchstart="addChar('+', event)" data-theme="c"></td>
                 <td colspan="2"><input type="button" value="DEL" onmousedown="delChar(event)" ontouchstart="delChar(event)" data-theme="b"></td>
             </tr>
+            </tbody>
         </table>
 	</div><!-- /content -->
 

@@ -62,9 +62,6 @@ PlayBook            600 * 1024
 
 .plate {
     position: absolute;
-    /*border: 1px solid red;*/
-    /*width: 100px;*/
-    /*height: 105px;*/
     color: #000000;
     font-size: 20px;
     overflow: visible;
@@ -75,16 +72,14 @@ PlayBook            600 * 1024
     user-select: none;
 }
 .plate > div {
-    /*border: 1px solid red;*/
-    /*position: relative;*/
     text-align: center;
     margin-top: -65px;
     width: 100%;
 }
-.plate > span {
+/*.plate > span {*/
     /*border: 1px solid red;*/
-    position: absolute;width:100px;height:105px;top:0;left:0;
-}
+    /*position: absolute;width:100px;height:105px;top:0;left:0;*/
+/*}*/
 /*  keyboard styles for desktop  */
 #keyboard {
     width: 100%;
