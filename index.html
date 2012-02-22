@@ -28,13 +28,21 @@
 
 <script type="text/javascript" >
 
-    var dragObj;
     var arrPlates;
     var currentObjectEdited;
     var trashBin;
+    var dragObj;
 
     $(document).ready(function() {
         var p, c, l;
+
+        //forcing the app to load the first screen if the user lands directly on the second page
+        if ($.mobile.activePage[0].id === 'calculator') {
+            l = window.location;
+            l.hash = '';
+            window.location = l;
+        }
+
         dragObj = {zIndex: 0};
         arrPlates = [];
 
@@ -53,12 +61,6 @@
         document.getElementById('contentHome').addEventListener('mousedown', addNewPlate, false);
         trashBin = document.getElementById('trash');
 
-        //forcing the app to load the first screen if the user lands directly on the second page
-        if ($.mobile.activePage[0].id === 'calculator') {
-            l = window.location;
-            l.hash = '';
-            window.location = l;
-        }
         // fix for canceling the scrolling of the body on mobile devices
         document.body.addEventListener('touchmove', function(event) {
                 event.preventDefault();
