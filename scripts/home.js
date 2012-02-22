@@ -67,7 +67,7 @@ function registerEventsForPlate(element) {
 }
 
 function editPlate(e) {
-//    console.log('mouse click');
+//    console.log('edit plate');
     if (Math.abs(dragObj.elStartLeft - dragObj.elNode.offsetLeft) < 10 && Math.abs(dragObj.elStartTop - dragObj.elNode.offsetTop) < 10 ) {
         currentObjectEdited = dragObj.elNode;
         $.mobile.changePage($("#calculator"));
@@ -132,6 +132,8 @@ function dragTouchEnd(e) {
     p = getPosition(dragObj.elNode);
     if (comparePositions(t[0], p[0]) && comparePositions(t[1], p[1])) {
         deletePlate(dragObj.elNode);
+    } else {
+        persistApplicationState(arrPlates);
     }
     trashBin.style.opacity = 0.3;
     e.stopPropagation();
