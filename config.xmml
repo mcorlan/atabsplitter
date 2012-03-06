@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "org.corlan.atabsplitter"
+        version   = "1.0.0">
+
+    <name>aTabSplitter</name>
+
+    <description>
+        A simple app for splitting a restaurant bill.
+    </description>
+
+    <author href="http://corlan.org" email="mcorlan@adobe.com">
+        Mihai Corlan 
+    </author>
+    
+    <preference name="orientation" value="portrait" />
+    
+    <!-- the default attribute can also be used -->
+	<icon src="assets/icons/48" default="true" />
+	
+	<!-- Android icons -->
+    <icon src="assets/icons/36.png" width="36" height="36"/>
+	<icon src="assets/icons/48.png" width="48" height="48"/>
+	<icon src="assets/icons/72.png" width="72" height="72"/>
+	
+	<!-- if a single splash screen is specified it will be used for all platforms -->
+	<gap:splash src="assets/images/table_01.png" />
+</widget>
