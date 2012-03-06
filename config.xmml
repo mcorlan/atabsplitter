@@ -17,7 +17,7 @@
     <preference name="orientation" value="portrait" />
     
     <!-- the default attribute can also be used -->
-	<icon src="assets/icons/48" default="true" />
+	<icon src="assets/icons/48.png" gap:role="default" />
 	
 	<!-- Android icons -->
     <icon src="assets/icons/36.png" width="36" height="36"/>
