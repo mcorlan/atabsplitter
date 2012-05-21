@@ -1,12 +1,12 @@
 CACHE MANIFEST
-# 2012-02-22:v30
+# 2012-05-21:v31
 
 CACHE:
 index.html
 styles/styles.css
-styles/jquery.mobile-1.0.1.min.css
-scripts/jquery-1.6.4.min.js
-scripts/jquery.mobile-1.0.1.min.js
+styles/jquery.mobile-1.1.0.css
+scripts/jquery-1.7.1.min.js
+scripts/jquery.mobile-1.1.0.min.js
 scripts/utils.js
 scripts/home.js
 scripts/calculator.js
@@ -15,6 +15,7 @@ assets/images/table_01.jpg
 assets/images/bill.jpg
 assets/images/trash.png
 assets/favicon.ico
+styles/images/ajax-loader.gif
 styles/images/ajax-loader.png
 styles/images/icons-18-black.png
 styles/images/icons-18-white.png
