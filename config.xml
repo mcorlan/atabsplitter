@@ -14,7 +14,7 @@
         Mihai Corlan 
     </author>
     
-    <preference name="phonegap-version" value="2.5.0" />
+    <preference name="phonegap-version" value="2.7.0" />
     <preference name="orientation" value="portrait" />
     
     <!-- the default attribute can also be used -->
